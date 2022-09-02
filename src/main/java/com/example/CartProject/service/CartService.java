@@ -14,4 +14,6 @@ public interface CartService {
     CartTotalPriceResponseDto getFinalTotalPrice(Long userId);
 
     void deleteProductInCart(Long id);
+
+    public Cart cart();
 }

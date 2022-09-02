@@ -13,6 +13,7 @@ import com.example.CartProject.dto.CartRequestDto;
 import com.example.CartProject.dto.CartTotalPriceResponseDto;
 import com.example.CartProject.service.CartService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +22,12 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
-
+    @Override
+    @Bean
+    public Cart cart() {
+        Cart cart = new Cart();
+        return cart;
+    }
 
     public  final CartRepository cartRepository;
     private final UserRepository userRepository;
@@ -82,10 +88,10 @@ public class CartServiceImpl implements CartService {
         c.setTotalPrice(totalPrice);
         c.setTransactionId(UUID.randomUUID().toString());
 
-        //Buat objek check out dan
+        //Buat objek checkout dan
         Checkout checkout = new Checkout();
         //Cari user dengan id tertentu
-        User user = userRepository.findById(userId).orElse(null);
+        User user = userRepository.findById(userId).get();
         checkout.setUserId(user);
         checkout.setTotalPrice(totalPrice);
         checkout.setTransactionId(UUID.randomUUID().toString());

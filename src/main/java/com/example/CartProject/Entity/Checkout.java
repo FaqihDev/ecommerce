@@ -22,4 +22,5 @@ public class Checkout extends BaseModel{
 
     @Column(name = "transaction_id")
     private String transactionId;
+
 }

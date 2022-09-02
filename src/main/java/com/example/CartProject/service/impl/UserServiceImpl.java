@@ -38,10 +38,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(Long id, User param){
         User user = userRepository.findById(id).get();
-        param.setIsDeleted(0);
-        param.setName(param.getName());
-        param.setEmail(param.getEmail());
-        param.setPassword(param.getPassword());
+        user.setIsDeleted(0);
+        user.setName(param.getName());
+        user.setEmail(param.getEmail());
+        user.setPassword(param.getPassword());
+        user.setUpdatedBy("User");
+        Date today = Date.from(Instant.now());
+        user.setUpdatedDate(today);
         return userRepository.save(user);
     }
 
